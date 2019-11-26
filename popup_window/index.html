@@ -1,0 +1,140 @@
+<div class="popup-container">
+
+  <div id="popup-banner">
+      <div class="content">
+        <div class="image-wrapper">
+          <img src="https://www.arrowpublications.co.uk/wp-content/uploads/black-friday-deal.jpg" alt="" />
+        </div>
+        <div class="button-box">
+          <a class="btn btn-grey" href="/contact/">
+            Message Us
+          </a>
+
+          <span class="btn btn-grey" id="close-popup">
+            Close
+          </span>
+
+          <!-- </div> -->
+
+        </div>
+        <label for="show"><small>Don't show again</small>
+        <input type="checkbox" name="dont-show" value="" id="show" /></label>
+      </div>
+    </div>
+
+    <style>
+    #popup-banner {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.85);
+    }
+    #popup-banner .content {
+      position: fixed;
+      margin-top: 5vh;
+      left: 50%;
+      transform: translateX(-50%);
+      background: white;
+      border-radius: 6px;
+      padding: 10px;
+    }
+    @media (max-width: 450px) {
+      #popup-banner .content .image-wrapper img {
+        /*width: 100%;*/
+        max-width: none !important;
+        /*left: 0;*/
+      }
+    }
+    #popup-banner .content .image-wrapper img {
+      height: 75vh !important;
+    }
+    #popup-banner .btn {
+      padding: 10px 20px;
+      border-radius: 5px;
+      background: #476B74;
+      margin-top: 10px;
+      color: white;
+      cursor: pointer;
+      /* height: 50px; */
+    }
+    #popup-banner a,
+    #popup-banner a:visited,
+    #popup-banner a:active {
+      color: white;
+      text-decoration: none;
+    }
+    #popup-banner .button-box {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: top;
+    }
+    #popup-banner .button-box .close-button{
+      /* display: flex;
+      flex-direction: column;
+      justify-content: right; */
+    }
+    #popup-banner label {
+      float: right;
+    }
+    #popup-banner #show {
+      position: relative;
+      top: 2px;
+    }
+    </style>
+
+
+    <script type="text/javascript" charset="utf-8">
+
+    jQuery(function($){
+
+      $(document).ready(function() {
+
+        function setCookie(cname, cvalue, exdays) {
+          var d = new Date();
+          d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+          var expires = "expires="+d.toUTCString();
+          document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+        }
+
+        function getCookie(cname) {
+          var name = cname + "=";
+          var ca = document.cookie.split(';');
+          for(var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') {
+              c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+              return c.substring(name.length, c.length);
+            }
+          }
+          return "";
+        }
+
+        var user = getCookie("popup_status");
+
+        if (user == "") {
+          setTimeout(function() {
+            $('#popup-banner').slideDown();
+          }, 500);
+        }
+
+        $('#close-popup').click(function() {
+
+          if($('#show').prop('checked')) {
+            setCookie("popup_status", "noshow", 2);
+          };
+
+          $('#popup-banner').slideUp();
+        });
+
+      });
+
+    });
+    </script>
+</div>
